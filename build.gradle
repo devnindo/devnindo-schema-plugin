@@ -1,0 +1,47 @@
+plugins
+        {
+            id 'idea'
+            id 'java-gradle-plugin'
+            id 'maven-publish'
+        }
+
+group "io.devnindo.plugin"
+version '0.9.17'
+sourceCompatibility = JavaVersion.VERSION_17
+
+gradlePlugin {
+    plugins {
+        devnindoPlugin {
+            id = "devnindo-schemagen"
+            implementationClass = "io.devnindo.schemagen.PluginMain"
+        }
+
+    }
+}
+
+
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
+
+apply from: 'remote-repo.gradle'
+
+
+dependencies {
+
+    implementation 'com.thoughtworks.qdox:qdox:2.0.2'
+    implementation 'com.squareup:javapoet:1.13.0'
+    implementation('io.devnindo.core:type-common:0.9.5') { changing = true }
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.0'
+}
+
+task publishPlugin(type: GradleBuild) {
+    tasks = [
+            'clean',
+            'test',
+            'build',
+            'generateMetadataFileForPluginMavenPublication',
+            'publishPluginMavenPublicationToMavenRepository',
+            'publish'
+    ]
+}
