@@ -15,7 +15,10 @@
  */
 package io.devnindo.schemagen.parse;
 
-import com.thoughtworks.qdox.model.*;
+import com.thoughtworks.qdox.model.JavaAnnotation;
+import com.thoughtworks.qdox.model.JavaClass;
+import com.thoughtworks.qdox.model.JavaField;
+import com.thoughtworks.qdox.model.JavaMethod;
 import com.thoughtworks.qdox.model.impl.DefaultJavaParameterizedType;
 import io.devnindo.datatype.schema.AField;
 import io.devnindo.datatype.schema.IgnoreField;
@@ -190,21 +193,16 @@ public class FieldSetParser {
 
     private RuntimeException initInvalidTypeException(String fieldName, String typeName) {
         String info = initClzFieldInfo("Declared Type doesn't conform to valid Json", fieldName, typeName)
-                .append("
-                        ")
-                                .toString();
+                .append("").toString();
         return new RuntimeException(info);
     }
 
     private StringBuilder initClzFieldInfo(String message, String fieldName, String typeName$) {
         return new StringBuilder()
                 .append(message)
-                .append("
-                        ").append("BEAN"+javaClz.getFullyQualifiedName())
-                                .append("
-                                        ").append("FIELD"+fieldName)
-                                                .append("
-                                                        ").append("TYPE"+typeName$);
+                .append("").append("BEAN" + javaClz.getFullyQualifiedName())
+                .append("").append("FIELD" + fieldName)
+                .append("").append("TYPE" + typeName$);
     }
 
 }
