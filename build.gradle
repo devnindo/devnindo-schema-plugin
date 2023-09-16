@@ -9,7 +9,7 @@ group "io.devnindo.plugin"
 version '0.9.17'
 sourceCompatibility = JavaVersion.VERSION_17
 pluginBundle {
-//    website = 'https://devnindo.io/gradle/devnindo-schema-plugin'
+    website = 'https://devnindo.io'
     vcsUrl = 'https://github.com/devnindo/devnindo-schema-plugin.git'
     tags = ['data-helper', 'data-generator', 'devnindo']
 }
