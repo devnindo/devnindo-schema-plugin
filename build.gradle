@@ -1,29 +1,26 @@
-plugins
-        {
-            id 'idea'
-            id 'java-gradle-plugin'
-            id 'maven-publish'
-            id 'com.gradle.plugin-publish' version "1.2.1"
-        }
+plugins {
+    id 'idea'
+    id 'java-gradle-plugin'
+    id 'maven-publish'
+    id 'com.gradle.plugin-publish' version '1.2.1'
+}
 
 group "io.devnindo.plugin"
 version '0.9.17'
 sourceCompatibility = JavaVersion.VERSION_17
 pluginBundle {
-    website = 'https://devnindo.io'
+//    website = 'https://devnindo.io/gradle/devnindo-schema-plugin'
     vcsUrl = 'https://github.com/devnindo/devnindo-schema-plugin.git'
     tags = ['data-helper', 'data-generator', 'devnindo']
 }
 
 gradlePlugin {
-//    website = 'https://devnindo.io'
-//    vcsUrl = 'https://github.com/devnindo/devnindo-schema-plugin.git'
     plugins {
         devnindoPlugin {
             id = "io.devnindo.devnindo-schemagen"
+            implementationClass = "io.devnindo.schemagen.PluginMain"
             displayName = 'Plugin for generating data class'
             description = 'A plugin that generate io.devnindo.core:devnindo-datatype data class'
-            implementationClass = "io.devnindo.schemagen.PluginMain"
         }
 
     }
