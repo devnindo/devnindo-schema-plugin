@@ -1,7 +1,7 @@
 # `devnindo-schemagen` Plugin
 
-The `devnindo-schemagen` is a companion plugin designed for the Devnindo data type library. It assists in generating
-schema representations for classes, making JSON conversion and validation seamless.
+The `devnindo-schemagen` is a companion plugin designed for the [`devnindo-datatype`](https://github.com/devnindo/devnindo-datatype) library. It assists in generating
+schema representations for a DataBean class, making JSON conversion and field validation seamless.
 
 ## Installation
 
