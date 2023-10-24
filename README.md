@@ -24,7 +24,7 @@ plugins {
 ```
 
 Upon setup, a Gradle task `generateSchema` will be available. Running `compileJava` or `generateSchema`  task will create the schema representation
-for your class.
+for your `DataBean` class.
 
 
 

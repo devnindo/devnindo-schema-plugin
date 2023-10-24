@@ -8,10 +8,28 @@ plugins {
 group "io.devnindo.plugin"
 version '0.9.17'
 sourceCompatibility = JavaVersion.VERSION_17
+
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+    implementation 'com.thoughtworks.qdox:qdox:2.0.2'
+    implementation 'com.squareup:javapoet:1.13.0'
+    implementation 'io.devnindo.core:devnindo-datatype:0.9.8'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.0'
+}
+
 pluginBundle {
     website = 'https://devnindo.io'
     vcsUrl = 'https://github.com/devnindo/devnindo-schema-plugin.git'
-    tags = ['data-helper', 'data-generator', 'devnindo']
+    tags = [ 'schema-generator', 'devnindo']
 }
 
 gradlePlugin {
@@ -27,23 +45,7 @@ gradlePlugin {
 }
 
 
-configurations.all {
-    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
-}
 
-apply from: 'remote-repo.gradle'
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-
-    implementation 'com.thoughtworks.qdox:qdox:2.0.2'
-    implementation 'com.squareup:javapoet:1.13.0'
-    implementation 'io.devnindo.core:devnindo-datatype:0.9.8'
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.9.0'
-}
 
 task publishPlugin(type: GradleBuild) {
     tasks = [
