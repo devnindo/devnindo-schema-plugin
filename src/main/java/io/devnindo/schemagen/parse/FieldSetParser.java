@@ -200,9 +200,9 @@ public class FieldSetParser {
     private StringBuilder initClzFieldInfo(String message, String fieldName, String typeName$) {
         return new StringBuilder()
                 .append(message)
-                .append("").append("BEAN" + javaClz.getFullyQualifiedName())
-                .append("").append("FIELD" + fieldName)
-                .append("").append("TYPE" + typeName$);
+                .append("\n\t").append("BEAN" + javaClz.getFullyQualifiedName())
+                .append("\n\t").append("FIELD" + fieldName)
+                .append("\n\t").append("TYPE" + typeName$);
     }
 
 }
