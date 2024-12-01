@@ -30,7 +30,7 @@ repositories {
 
 
 publishing {
-   /* publications {
+   publications {
         ProjectPlugin(MavenPublication) {
             from components.java
 
@@ -38,7 +38,7 @@ publishing {
                 classifier = 'javadoc'
             }
         }
-    }*/
+    }
 
     repositories {
         maven  PrivateRepo
