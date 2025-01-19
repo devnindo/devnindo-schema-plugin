@@ -8,7 +8,7 @@ def PrivateRepo = {
     }
 
 }
-'?'
+
 pluginBundle {
     website = 'https://devnindo.io'
     vcsUrl = 'https://github.com/devnindo/devnindo-schema-plugin.git'
