@@ -42,15 +42,6 @@ public class BeanSrcTreeParser {
         builder.addSourceTree(srcDir);
         Collection<JavaClass> clzList = builder.getClasses();
 
-/*
-        Map<String, JavaClass> beanClzMap =  clzList.stream()
-                .filter(this::isDataBean0)
-                .collect(Collectors.toMap(clz -> clz.getFullyQualifiedName(), clz -> clz));
-
-        System.out.println("Found beans: "+beanClzMap.size());
-
-        Function<String, Boolean> beanChecker = (fullName) -> beanClzMap.containsKey(fullName);
-*/
 
         Map<String, SchemaSpec> specMap = new HashMap<>();
 

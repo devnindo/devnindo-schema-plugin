@@ -1,4 +1,4 @@
-package examples;
+package sample;
 
 public class NotDataBean {
     String name;

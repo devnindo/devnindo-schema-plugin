@@ -1,4 +1,4 @@
-package examples;
+package sample;
 
 
 import io.devnindo.datatype.schema.AField;

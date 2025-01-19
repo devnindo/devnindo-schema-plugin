@@ -19,21 +19,23 @@ import io.devnindo.schemagen.parse.BeanSrcTreeParser;
 import io.devnindo.schemagen.spec.SchemaSpec;
 import io.devnindo.schemagen.write.BeanSchemaWriter;
 
+import java.io.IOException;
 import java.util.Collection;
 
 public class SchemaParseTest {
     public static void main(String[] args) {
-
 
         try {
             BeanSrcTreeParser parser = new BeanSrcTreeParser("src/test/java");
             BeanSchemaWriter writer = new BeanSchemaWriter("src/test/java");
 
             Collection<SchemaSpec> specCollection = parser.parseAndBuildSpec();
+
             writer.write(specCollection);
-        } catch (Throwable th) {
-            th.printStackTrace();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+
     }
 }
 

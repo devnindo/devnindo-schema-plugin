@@ -99,15 +99,18 @@ public class FieldSetParser {
                         && m$.isPublic()
                 )
                 .map(m$ -> {
+
                     String pascalName = CaseUtil.ifPrefixedThanSuffix(m$.getName(), GETTER_PREFIX_LIST).right();
                     String fieldName = CaseUtil.pascalToCamel(pascalName);
                     FieldTypeSpec typeSpec = calcFieldTypeSpec0(fieldName, m$.getReturns());
+
                     return new SchemaFieldSpec.Builder()
                             .setName(fieldName)
                             .setGetterFunc(m$.getName())
                             .setTypeSpec(typeSpec)
                             .setReadOnly(true)
                             .build();
+
                 })
                 .collect(Collectors.toSet());
     }
@@ -122,13 +125,16 @@ public class FieldSetParser {
                 getter = methodMap$.get(methodName);
             }
         }
-        String notNullGetterMSG = initClzFieldInfo("Missing Getter func for a data field", fieldName$, typeName).toString();
-        Objects.requireNonNull(getter, notNullGetterMSG);
+        // NOTE: getter will be missing if not declared with public modifier
+        if(Objects.isNull(getter))
+        {
+            String getterMissingMsg = initClzFieldInfo("Missing Getter with Public Modifier", fieldName$, typeName).toString();
+            throw new RuntimeException(getterMissingMsg);
+        }
 
         JavaClass getterReturnType = getter.getReturns();
         if (getterReturnType.isA(fieldType$) == false) {
-            String invalidGetterMsg = initClzFieldInfo("Invalid Getter Return Type", fieldName$, typeName)
-                    .toString();
+            String invalidGetterMsg = initClzFieldInfo("Invalid Getter Return Type", fieldName$, typeName);
             throw new RuntimeException(invalidGetterMsg);
         }
 
@@ -154,21 +160,25 @@ public class FieldSetParser {
     private FieldTypeSpec calcFieldTypeSpec0(String fieldName, JavaClass fieldType) {
         String typeName = fieldType.getFullyQualifiedName();
         FieldTypeSpec fieldTypeSpec = null;
+
         if (beanChecker.isDataBean(fieldType)) {
             fieldTypeSpec = FieldTypeSpec.init(typeName, FieldTypeSpec.TypeGroup.BEAN);
-        } else if (typeName.equals(LIST_TYPE)) {
+        }
+        else if (typeName.equals(LIST_TYPE)) {
 
             DefaultJavaParameterizedType genericType = (DefaultJavaParameterizedType) fieldType;
             JavaClass paramType = (JavaClass) genericType.getActualTypeArguments().get(0);
-
             String paramTypeName = paramType.getFullyQualifiedName();
+
             if (FieldTypeSpec.isInPlainSet(paramTypeName))
                 fieldTypeSpec = FieldTypeSpec.init(paramTypeName, FieldTypeSpec.TypeGroup.PLAIN_LIST);
             else if (beanChecker.isDataBean(paramType))
                 fieldTypeSpec = FieldTypeSpec.init(paramTypeName, FieldTypeSpec.TypeGroup.BEAN_LIST);
+            else
+                throw initInvalidTypeException(fieldName, "List<" + paramTypeName + ">");
 
-            else throw initInvalidTypeException(fieldName, "List<" + paramTypeName + ">");
-        } else if (fieldType.isEnum())
+        }
+        else if (fieldType.isEnum())
             fieldTypeSpec = FieldTypeSpec.init(typeName, FieldTypeSpec.TypeGroup.AN_ENUM);
         else if (FieldTypeSpec.isInPlainSet(typeName))
             fieldTypeSpec = FieldTypeSpec.init(typeName, FieldTypeSpec.TypeGroup.PLAIN);
@@ -192,17 +202,17 @@ public class FieldSetParser {
     }
 
     private RuntimeException initInvalidTypeException(String fieldName, String typeName) {
-        String info = initClzFieldInfo("Declared Type doesn't conform to valid Json", fieldName, typeName)
-                .append("").toString();
+        String info = initClzFieldInfo("Invalid DataBean Field Type", fieldName, typeName);
         return new RuntimeException(info);
     }
 
-    private StringBuilder initClzFieldInfo(String message, String fieldName, String typeName$) {
+    private String initClzFieldInfo(String message, String fieldName, String typeName$) {
         return new StringBuilder()
                 .append(message)
-                .append("\n\t").append("BEAN" + javaClz.getFullyQualifiedName())
-                .append("\n\t").append("FIELD" + fieldName)
-                .append("\n\t").append("TYPE" + typeName$);
+                .append("\n\t").append("BEAN: " + javaClz.getFullyQualifiedName())
+                .append("\n\t").append("FIELD: " + fieldName)
+                .append("\n\t").append("TYPE: " + typeName$)
+                .toString();
     }
 
 }

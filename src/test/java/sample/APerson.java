@@ -1,7 +1,6 @@
-package examples;
+package sample;
 
 import io.devnindo.datatype.schema.DataBean;
-import io.devnindo.datatype.schema.AField;
 import io.devnindo.datatype.schema.IgnoreField;
 import io.devnindo.datatype.schema.Required;
 import io.devnindo.datatype.util.SampleBean;
@@ -11,7 +10,6 @@ import java.util.List;
 public class APerson implements DataBean {
     @Required
     Long id;
-
 
     @IgnoreField
     String name;
@@ -42,10 +40,6 @@ public class APerson implements DataBean {
     public APerson setAge(Integer age$) {
         age = age$;
         return this;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public Integer getCertCount() {

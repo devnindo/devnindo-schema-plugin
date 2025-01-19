@@ -23,12 +23,12 @@ import io.devnindo.schemagen.spec.SchemaFieldSpec;
 import javax.lang.model.element.Modifier;
 import java.util.Set;
 
-public class BeanApplyBuilder {
+public class BeanApplyMethodBuilder {
     public final ClassName beanName;
     public final Set<SchemaFieldSpec> fieldSpecSet;
     private final MethodSpec.Builder mBuilder;
 
-    public BeanApplyBuilder(ClassName beanName, Set<SchemaFieldSpec> fieldSpecSet) {
+    public BeanApplyMethodBuilder(ClassName beanName, Set<SchemaFieldSpec> fieldSpecSet) {
         this.beanName = beanName;
         this.fieldSpecSet = fieldSpecSet;
         mBuilder = MethodSpec.methodBuilder("apply")

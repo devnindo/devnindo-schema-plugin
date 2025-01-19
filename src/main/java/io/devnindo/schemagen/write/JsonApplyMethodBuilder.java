@@ -25,12 +25,12 @@ import javax.lang.model.element.Modifier;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class JsonApplyBuilder {
+public class JsonApplyMethodBuilder {
     public final ClassName beanName;
     public final Set<SchemaFieldSpec> fieldSpecSet;
     private final MethodSpec.Builder mBuilder;
 
-    public JsonApplyBuilder(ClassName beanName, Set<SchemaFieldSpec> fieldSpecSet) {
+    public JsonApplyMethodBuilder(ClassName beanName, Set<SchemaFieldSpec> fieldSpecSet) {
         this.beanName = beanName;
         this.fieldSpecSet = fieldSpecSet.stream()
                 .filter(f -> f.readOnly == false)

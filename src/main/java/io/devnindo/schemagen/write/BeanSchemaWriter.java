@@ -58,10 +58,10 @@ public class BeanSchemaWriter {
                 .collect(Collectors.toList());
 
 
-        JsonApplyBuilder jsonApply = new JsonApplyBuilder(beanName, schemaSpec$.fieldSpecSet);
+        JsonApplyMethodBuilder jsonApply = new JsonApplyMethodBuilder(beanName, schemaSpec$.fieldSpecSet);
         MethodSpec jsonToBeanApplyMethod = jsonApply.buildMethodSpec();
 
-        BeanApplyBuilder beanApply = new BeanApplyBuilder(beanName, schemaSpec$.fieldSpecSet);
+        BeanApplyMethodBuilder beanApply = new BeanApplyMethodBuilder(beanName, schemaSpec$.fieldSpecSet);
         MethodSpec beanToJsonApplyMethod = beanApply.buildMethodSpec();
 
         DiffMethodBuilder diffBuilder = new DiffMethodBuilder(beanName, schemaSpec$.fieldSpecSet);

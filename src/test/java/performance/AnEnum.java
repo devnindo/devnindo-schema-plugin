@@ -1,2 +1,6 @@
-package performance;public enum AnEnum {
+package performance;
+
+public enum AnEnum
+{
+    one, two, three
 }

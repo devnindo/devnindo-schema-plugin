@@ -1,6 +1,7 @@
-package examples;
+package sample;
 
 import io.devnindo.datatype.schema.DataBean;
+import io.devnindo.datatype.schema.IgnoreField;
 
 
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.List;
 public class Address implements DataBean {
      String city;
 
+     @IgnoreField
      NotDataBean dataBean;
      List<String> roadList;
 
@@ -15,7 +17,7 @@ public class Address implements DataBean {
         return dataBean;
     }
 
-      String getCity() {
+    public  String getCity() {
         return city;
     }
 
