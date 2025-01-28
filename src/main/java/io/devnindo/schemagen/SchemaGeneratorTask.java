@@ -27,7 +27,7 @@ import java.io.File;
 import java.util.Collection;
 import java.util.Set;
 
-public class TaskSchemaGenerator extends DefaultTask {
+public class SchemaGeneratorTask extends DefaultTask {
 
 
     public void generateSchema(File srcDir, File ourDir) {

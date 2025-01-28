@@ -28,7 +28,7 @@ public class PluginMain implements Plugin<Project> {
     public void apply(Project project) {
 
 
-        Task genSchema = project.getTasks().create("genSchema", TaskSchemaGenerator.class, (task$) ->
+        Task genSchema = project.getTasks().create("genSchema", SchemaGeneratorTask.class, (task$) ->
         {
         });
 
