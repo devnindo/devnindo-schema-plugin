@@ -15,12 +15,15 @@ configurations.all {
 apply from: 'remote-repo.gradle'
 
 gradlePlugin  {
+    website = 'https://devnindo.io'
+    vcsUrl = 'https://github.com/devnindo/devnindo-schema-plugin.git'
     plugins {
         schemaGen {
             id = "io.devnindo.devnindo-schemagen"
             implementationClass = "io.devnindo.schemagen.PluginMain"
             displayName = 'Plugin for generating data bean class'
             description = 'A plugin that generate io.devnindo.core:devnindo-datatype data class'
+            tags.set([ 'schema-generator', 'devnindo'])
         }
 
     }
